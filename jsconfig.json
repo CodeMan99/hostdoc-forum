@@ -5,5 +5,10 @@
             "@/*": ["resources/js/*"]
         }
     },
+    "vueCompilerOptions": {
+        "plugins": [
+            "@vue/language-plugin-pug"
+        ]
+    },
     "exclude": ["node_modules", "public"]
 }
