@@ -1,6 +1,11 @@
 <template>
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z" fill="#6875F5" />
-        <path d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z" fill="#6875F5" />
+    <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient gradientUnits="userSpaceOnUse" x1="240" y1="0" x2="240" y2="480" id="gradient-0">
+                <stop offset="0" style="stop-color: rgb(100% 0% 0%)" />
+                <stop offset="1" style="stop-color: rgb(33% 0% 0%)" />
+            </linearGradient>
+        </defs>
+        <path d="M 480 240 C 480 372.548 372.548 480 240 480 C 107.452 480 0 372.548 0 240 C 0 107.452 107.452 0 240 0 C 372.548 0 480 107.452 480 240 Z M 90 182 L 390 182 L 390 122 L 90 122 Z M 90 270 L 360 270 L 360 210 L 90 210 Z M 90 358 L 376 358 L 376 298 L 90 298 Z" style="fill-rule: nonzero; fill: url(&quot;#gradient-0&quot;);" />
     </svg>
 </template>
