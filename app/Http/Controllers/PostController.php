@@ -13,8 +13,13 @@ class PostController extends Controller
      */
     public function index()
     {
+        $page_size = 15;
+        $posts = Post::latest()
+            ->paginate($page_size)
+            ->withQueryString();
+
         return inertia('Posts/Index', [
-            'posts' => PostResource::collection(Post::all()),
+            'posts' => PostResource::collection($posts),
         ]);
     }
 
