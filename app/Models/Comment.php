@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utilities\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,11 @@ class Comment extends Model
 {
     /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
+
+    public function preview_body(): string
+    {
+        return Str::preview($this->body);
+    }
 
     public function post(): BelongsTo
     {
