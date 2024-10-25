@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $page_size = 15;
-        $posts = Post::latest()
+        $posts = Post::latest('id')
             ->paginate($page_size)
             ->withQueryString();
 
