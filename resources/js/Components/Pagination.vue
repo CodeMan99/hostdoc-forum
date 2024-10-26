@@ -5,7 +5,7 @@ import { computed } from "vue";
 
 const { meta } = defineProps(["meta"]);
 const previous = computed(() => {
-    const disabled = meta.from === meta.current_page;
+    const disabled = meta.current_page === 1;
 
     return {
         ...meta.links.at(0),
@@ -14,7 +14,7 @@ const previous = computed(() => {
 });
 const pages = computed(() => meta.links.slice(1, -1));
 const next = computed(() => {
-    const disabled = meta.current_page === meta.to;
+    const disabled = meta.current_page === meta.last_page;
 
     return {
         ...meta.links.at(-1),
