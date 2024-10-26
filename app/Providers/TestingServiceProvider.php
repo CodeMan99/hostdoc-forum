@@ -48,6 +48,12 @@ class TestingServiceProvider extends ServiceProvider
             return $this;
         });
 
+        TestResponse::macro('assertComponentExists', function (string $name) {
+            return $this->assertInertia(
+                fn (AssertableInertia $inertia) => $inertia->component($name, true)
+            );
+        });
+
         TestResponse::macro('assertResource', function (string $key, JsonResource $resource) {
             return $this->assertInertia(
                 fn (AssertableInertia $inertia) => $inertia->hasResource($key, $resource)

@@ -7,7 +7,7 @@ defineProps(['posts']);
 </script>
 
 <template lang="pug">
-    AppLayout
+    AppLayout(title="Posts")
         Container
             ul.divide-y
                 li.px-2.py-4(v-for="post in posts.data" :key="post.id")
