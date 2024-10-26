@@ -1,6 +1,6 @@
 <script setup>
-import Container from '@/Components/Container.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import Container from '@/Components/Container.vue';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 

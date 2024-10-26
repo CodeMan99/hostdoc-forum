@@ -15,6 +15,7 @@ class PostController extends Controller
     {
         $page_size = 15;
         $posts = Post::latest('id')
+            ->with('user')
             ->paginate($page_size)
             ->withQueryString();
 
