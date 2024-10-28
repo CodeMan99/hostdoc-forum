@@ -12,6 +12,10 @@ class Comment extends Model
     /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'body',
+    ];
+
     public function preview_body(): string
     {
         return Str::preview($this->body);
