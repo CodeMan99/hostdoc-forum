@@ -23,5 +23,5 @@ defineProps(['posts']);
                         span.text-gray-700 {{ post.user.name }}
                         | &#x20;
                         span.text-gray-500 &ndash; {{ dayjs(post.createdAt).fromNow() }}
-            Pagination(:meta="posts.meta")
+            Pagination(:meta="posts.meta", :only="['posts']")
 </template>

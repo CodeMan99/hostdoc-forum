@@ -36,5 +36,5 @@ defineProps([
                 .text-sm.place-self-end.text-gray-500 {{ dayjs(comment.createdAt).fromNow() }}
                 p.col-span-2 {{ comment.body }}
 
-            Pagination.mx-12.mt-4(:meta="comments.meta")
+            Pagination.mx-12.mt-4(:meta="comments.meta", :only="['comments']")
 </template>

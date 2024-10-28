@@ -48,16 +48,20 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $comments_per_page = 10;
-        $comments = $post->comments()
-            ->with('user')
-            ->latest('id')
-            ->paginate($comments_per_page)
-            ->withQueryString();
-        $post->load('user');
+        $comments = fn () => CommentResource::collection(
+            $post->comments()
+                ->with('user')
+                ->latest('id')
+                ->paginate($comments_per_page)
+                ->withQueryString()
+        );
+        $post_resource = fn () => PostResource::make(
+            $post->load('user')
+        );
 
         return inertia('Posts/Show', [
-            'comments' => CommentResource::collection($comments),
-            'post' => PostResource::make($post),
+            'comments' => $comments,
+            'post' => $post_resource,
         ]);
     }
 

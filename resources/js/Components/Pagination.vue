@@ -3,7 +3,16 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/20/solid";
 import { Link } from "@inertiajs/vue3";
 import { computed } from "vue";
 
-const { meta } = defineProps(["meta"]);
+const { meta } = defineProps({
+    meta: {
+        type: Object,
+        required: true,
+    },
+    only: {
+        type: Array,
+        default: () => [],
+    },
+});
 const previous = computed(() => {
     const disabled = meta.current_page === 1;
 
@@ -35,6 +44,7 @@ const next = computed(() => {
                     'cursor-not-allowed bg-gray-300': previous.disabled,
                     'hover:bg-gray-50': !previous.disabled,
                 }"
+                :only="only"
                 >Previous</Link
             >
             <Link
@@ -44,6 +54,7 @@ const next = computed(() => {
                     'cursor-not-allowed bg-gray-300': next.disabled,
                     'hover:bg-gray-50': !next.disabled,
                 }"
+                :only="only"
                 >Next</Link
             >
         </div>
@@ -71,6 +82,7 @@ const next = computed(() => {
                             'hover:bg-gray-50 focus:outline-offset-0':
                                 !previous.disabled,
                         }"
+                        :only="only"
                     >
                         <ChevronLeftIcon
                             class="h-5 w-5"
@@ -88,6 +100,7 @@ const next = computed(() => {
                             'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0':
                                 !link.active,
                         }"
+                        :only="only"
                     >
                         <span v-html="link.label"></span>
                     </Link>
@@ -99,6 +112,7 @@ const next = computed(() => {
                             'hover:bg-gray-50 focus:outline-offset-0':
                                 !next.disabled,
                         }"
+                        :only="only"
                     >
                         <span class="sr-only">Next</span>
                         <ChevronRightIcon
