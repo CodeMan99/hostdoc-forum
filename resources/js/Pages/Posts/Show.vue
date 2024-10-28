@@ -9,6 +9,7 @@ import TextArea from '@/Components/TextArea.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
+import UserAvatar from '@/Components/UserAvatar.vue';
 
 dayjs.extend(relativeTime);
 
@@ -33,7 +34,7 @@ const addComment = () => {
     AppLayout(:title="post.title")
         Container
             article.grid.gap-6.bg-white.px-8.py-4.rounded-2xl(class="grid-cols-[auto_1fr_1fr]")
-                img.place-self-center.row-span-2.h-20.w-20.rounded-full(:src="post.user.avatar", :alt="`Profile photo for ${post.user.name}`")
+                UserAvatar.place-self-center.row-span-2(:user="post.user", size="20")
                 .self-end
                     h1.text-xl {{ post.title }}
                     h3
@@ -45,10 +46,7 @@ const addComment = () => {
 
             .bg-white.mx-8.mt-4.px-8.py-4.rounded-2xl(v-if="$page.props.auth.user")
                 form.flex.gap-4.justify-between(@submit.prevent="addComment")
-                    img.place-self-center.row-span-2.h-16.w-16.rounded-full(
-                        :src="$page.props.auth.user.profile_photo_url"
-                        :alt="`Profile photo for ${$page.props.auth.user.name}`"
-                    )
+                    UserAvatar.place-self-center(:user="$page.props.auth.user", size="16")
                     .w-full
                         InputLabel.sr-only(for="hostdoc-comment-body") Comment
                         TextArea.resize-none#hostdoc-comment-body(v-model="commentForm.body", rows="3", placeholder="Weigh in with your thoughts")
@@ -56,7 +54,7 @@ const addComment = () => {
                 InputError.mt-2(:message="commentForm.errors.body")
 
             article.grid.gap-4.bg-gray-50.mt-4.mx-8.px-8.py-4.rounded-2xl(v-for="comment in comments.data", :id="comment.id", class="grid-cols-[auto_1fr_1fr]")
-                img.place-self-center.row-span-2.h-16.w-16.rounded-full(:src="comment.user.avatar", :alt="`Profile photo for ${comment.user.name}`")
+                UserAvatar.place-self-center.row-span-2(:user="comment.user", size="16")
                 h4
                     span.text-gray-500 Comment by
                     | &#x20;

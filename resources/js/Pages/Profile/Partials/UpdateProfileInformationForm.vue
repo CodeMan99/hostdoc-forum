@@ -8,6 +8,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import UserAvatar from '@/Components/UserAvatar.vue';
 
 const props = defineProps({
     user: Object,
@@ -101,7 +102,7 @@ const clearPhotoFileInput = () => {
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                    <UserAvatar :user="user" size="20"></UserAvatar>
                 </div>
 
                 <!-- New Profile Photo Preview -->
