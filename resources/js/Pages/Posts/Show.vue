@@ -19,7 +19,7 @@ import UserAvatar from '@/Components/UserAvatar.vue';
 
 dayjs.extend(relativeTime);
 
-const { post } = defineProps([
+const { comments, post } = defineProps([
     'comments',
     'post',
 ]);
@@ -36,7 +36,12 @@ const addComment = () => {
 };
 const commentCreatedBy = (user) => usePage().props.auth.user?.id === user.id;
 const deleteComment = (commentId) => {
-    const endpoint = route('comments.destroy', commentId);
+    const adjustPage = comments.meta.current_page > 1 && comments.meta.from === comments.meta.total ? -1 : 0;
+    const page = comments.meta.current_page + adjustPage;
+    const endpoint = route('comments.destroy', {
+        comment: commentId,
+        page,
+    });
 
     router.delete(endpoint, {
         preserveScroll: true,

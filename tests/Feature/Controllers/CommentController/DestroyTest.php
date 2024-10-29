@@ -32,6 +32,19 @@ it('redirects to the post show page', function() {
     $response->assertRedirectToRoute('posts.show', $comment->post_id);
 });
 
+it('redirects to the post show page with the page query parameter', function() {
+    $comment = Comment::factory()->createOne();
+
+    $response = actingAs($comment->user)->delete(route('comments.destroy', [
+        'comment' => $comment,
+        'page' => 2,
+    ]));
+    $response->assertRedirectToRoute('posts.show', [
+        'post' => $comment->post_id,
+        'page' => 2,
+    ]);
+});
+
 it('prevents deleting a comment you did not create', function() {
     $comment = Comment::factory()->createOne();
     $user = User::factory()->createOne();
