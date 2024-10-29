@@ -48,7 +48,7 @@ const deleteComment = (commentId) => {
     AppLayout(:title="post.title")
         Container
             article.grid.gap-6.bg-white.px-8.py-4.rounded-2xl(class="grid-cols-[auto_1fr_auto]")
-                UserAvatar.place-self-center.row-span-2(:user="post.user", size="20")
+                UserAvatar.size-20.place-self-center.row-span-2(:user="post.user")
                 .self-end
                     h1.text-xl {{ post.title }}
                     h3
@@ -60,7 +60,7 @@ const deleteComment = (commentId) => {
 
             .bg-white.mx-8.mt-4.px-8.py-4.rounded-2xl(v-if="$page.props.auth.user")
                 form.flex.gap-4.justify-between(@submit.prevent="addComment")
-                    UserAvatar.place-self-center(:user="$page.props.auth.user", size="16")
+                    UserAvatar.size-16.place-self-center(:user="$page.props.auth.user")
                     .w-full
                         InputLabel.sr-only(for="hostdoc-comment-body") Comment
                         TextArea.resize-none#hostdoc-comment-body(v-model="commentForm.body", rows="3", placeholder="Weigh in with your thoughts")
@@ -70,7 +70,7 @@ const deleteComment = (commentId) => {
                 InputError.mt-2(:message="commentForm.errors.body")
 
             article.grid.gap-4.bg-gray-50.mt-4.mx-8.px-8.py-4.rounded-2xl(v-for="comment in comments.data", :id="comment.id", class="grid-cols-[auto_1fr_auto_auto]")
-                UserAvatar.place-self-center.row-span-2(:user="comment.user", size="16")
+                UserAvatar.size-16.place-self-center.row-span-2(:user="comment.user")
                 h4
                     span.text-gray-500 Comment by
                     | &#x20;

@@ -102,7 +102,7 @@ const clearPhotoFileInput = () => {
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
-                    <UserAvatar :user="user" size="20"></UserAvatar>
+                    <UserAvatar :user="user" class="size-20"></UserAvatar>
                 </div>
 
                 <!-- New Profile Photo Preview -->
