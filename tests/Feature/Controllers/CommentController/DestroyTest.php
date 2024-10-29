@@ -8,6 +8,8 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\delete;
+use function Pest\Laravel\freezeTime;
+use function Pest\Laravel\travel;
 
 it('requires an authenticated user', function () {
     $comment = Comment::factory()->createOne();
@@ -35,5 +37,16 @@ it('prevents deleting a comment you did not create', function() {
     $user = User::factory()->createOne();
 
     $response = actingAs($user)->delete(route('comments.destroy', $comment));
+    $response->assertForbidden();
+});
+
+it('prevents deleting a comment posted more than one hour ago', function() {
+    freezeTime();
+
+    $comment = Comment::factory()->createOne();
+
+    travel(1)->hour();
+
+    $response = actingAs($comment->user)->delete(route('comments.destroy', $comment));
     $response->assertForbidden();
 });

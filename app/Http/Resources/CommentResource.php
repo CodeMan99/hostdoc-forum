@@ -14,6 +14,8 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $user = $request->user();
+
         return [
             'id' => $this->id,
             'user' => UserResource::make($this->whenLoaded('user')),
@@ -22,6 +24,9 @@ class CommentResource extends JsonResource
             'preview' => $this->preview_body(),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
+            'can' => $this->when($user, [
+                'destroy' => $user?->can('delete', $this->resource),
+            ]),
         ];
     }
 }

@@ -58,7 +58,7 @@ const deleteComment = (commentId) => {
                 .text-sm.self-end.text-gray-500 {{ dayjs(post.createdAt).fromNow() }}
                 p.col-span-2.break-words {{ post.body }}
 
-            .bg-white.mx-8.mt-4.px-8.py-4.rounded-2xl(v-if="$page.props.auth.user")
+            .bg-white.mx-8.mt-4.px-8.py-4.rounded-2xl(v-if="$page.props.auth.user && comments.meta.current_page === 1")
                 form.flex.gap-4.justify-between(@submit.prevent="addComment")
                     UserAvatar.size-16.place-self-center(:user="$page.props.auth.user")
                     .w-full
@@ -88,7 +88,7 @@ const deleteComment = (commentId) => {
                                 .flex.gap-4
                                     IconEdit.size-5
                                     span Edit
-                            DropdownLink(as="button", @click="deleteComment(comment.id)")
+                            DropdownLink(as="button", @click="deleteComment(comment.id)", :disabled="comment.can?.destroy !== true")
                                 .flex.gap-4
                                     IconTrashCan.size-5
                                     span Delete
