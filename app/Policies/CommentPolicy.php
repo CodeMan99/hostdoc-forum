@@ -8,28 +8,14 @@ use Illuminate\Auth\Access\Response;
 
 class CommentPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    private function is_created_by(User $user, Comment $comment): bool
     {
-        return true;
+        return $user->id === $comment->user_id;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Comment $comment): bool
+    private function is_recent(Comment $comment): bool
     {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return true;
+        return $comment->created_at->isAfter(now()->subHour());
     }
 
     /**
@@ -37,7 +23,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment): bool
     {
-        return true;
+        return $this->is_created_by($user, $comment);
     }
 
     /**
@@ -45,22 +31,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        return $user->id === $comment->user_id && $comment->created_at->isAfter(now()->subHour());
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Comment $comment): bool
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Comment $comment): bool
-    {
-        return $user->id === $comment->user_id;
+        return $this->is_created_by($user, $comment) && $this->is_recent($comment);
     }
 }

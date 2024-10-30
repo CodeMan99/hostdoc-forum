@@ -27,7 +27,11 @@ Route::middleware([
     Route::delete('comments/{comment}', [CommentController::class, 'destroy'])
         ->name('comments.destroy')
         ->can('delete', 'comment');
-    Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+    Route::post('posts/{post}/comments', [CommentController::class, 'store'])
+        ->name('posts.comments.store');
+    Route::put('comments/{comment}', [CommentController::class, 'update'])
+        ->name('comments.update')
+        ->can('update', 'comment');
 });
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
